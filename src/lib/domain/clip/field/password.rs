@@ -16,8 +16,8 @@ impl Password {
                     Ok(Self(None))
                 }
             }
+            None => Ok(Self(None))
         }
-        None => Ok(Self(None))
     }
 
     pub fn into_inner(self) -> Option<String> {
