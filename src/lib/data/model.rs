@@ -40,7 +40,7 @@ pub struct GetClip {
 impl From<ShortCode> for GetClip {
     fn from(shortcode: ShortCode) -> Self {
         GetClip {
-            shortcode: shortcode.into_inner()
+            shortcode: shortcode.into_inner(),
         }
     }
 }
@@ -56,7 +56,15 @@ pub struct NewClip {
     pub(in crate::data) shortcode: String,
     pub(in crate::data) content: String,
     pub(in crate::data) title: Option<String>,
-    pub(in crate::data) posted: i16,
+    pub(in crate::data) posted: i64,
     pub(in crate::data) expires: Option<NaiveDateTime>,
+    pub(in crate::data) password: Option<String>,
+}
+
+pub struct UpdateClip {
+    pub(in crate::data) shortcode: String,
+    pub(in crate::data) content: String,
+    pub(in crate::data) title: Option<String>,
+    pub(in crate::data) expires: Option<i64>,
     pub(in crate::data) password: Option<String>,
 }
