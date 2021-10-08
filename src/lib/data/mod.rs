@@ -13,6 +13,9 @@ pub enum DataError {
     Database(#[from] sqlx::Error),
 }
 
+// If you switch to a different database,
+// update sqlite to say, mysql or postgres.
+// Of course, all the module dependencies shoul be updated accordingly as well.
 pub type AppDatabase = Database<Sqlite>;
 pub type DatabasePool = sqlx::sqlite::SqlitePool;
 pub type Transaction<'t> = sqlx::Transaction<'t, Sqlite>;
