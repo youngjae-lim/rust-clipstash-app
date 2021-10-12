@@ -1,17 +1,16 @@
 use crate::domain::clip::ClipError;
 use derive_more::From;
+use rocket::{UriDisplayPath, UriDisplayQuery};
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 
-#[derive(Debug, Clone, Deserialize, Serialize, From)]
+#[derive(Debug, Clone, Deserialize, Serialize, From, UriDisplayPath, UriDisplayQuery)]
 pub struct ShortCode(String);
 
 impl ShortCode {
     pub fn new() -> Self {
         use rand::prelude::*;
-        let allowed_chars = [
-            'a', 'b', 'c', 'd', '1', '2', '3', '4'
-        ];
+        let allowed_chars = ['a', 'b', 'c', 'd', '1', '2', '3', '4'];
 
         let mut rng = thread_rng();
         let mut shortcode = String::with_capacity(10);
@@ -19,7 +18,7 @@ impl ShortCode {
             shortcode.push(
                 *allowed_chars
                     .choose(&mut rng)
-                    .expect("sampling array should have values")
+                    .expect("sampling array should have values"),
             );
         }
         Self(shortcode)
