@@ -222,9 +222,11 @@ name = "clipstash"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "crossbeam-channel",
  "derive_more",
  "dotenv",
  "handlebars",
+ "parking_lot",
  "rand",
  "rocket",
  "serde",
