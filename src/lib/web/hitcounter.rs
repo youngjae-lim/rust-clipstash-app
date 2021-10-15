@@ -87,7 +87,16 @@ impl HitCounter {
                             eprintln!("message processing error: {}", e);
                         }
                     }
-                    Err(e) => todo!(),
+                    Err(e) => match e {
+                        TryRecvError::Empty => {
+                            // update hits every 5 seconds
+                            std::thread::sleep(Duration::from_secs(5));
+                            if let Err(e) = tx_clone.send(HitCountMsg::Commit) {
+                                eprintln!("error sending commit msg to hits channel: {}", e);
+                            }
+                        }
+                        _ => break,
+                    },
                 }
             }
         });
